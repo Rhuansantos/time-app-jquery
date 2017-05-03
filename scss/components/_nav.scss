@@ -1,0 +1,43 @@
+nav{
+	@include grid-col(3);
+	// /width: 250px;
+	height: vh100;
+	background: $secondary;
+	ul{
+		color: white;
+		li{
+			list-style-type: none;
+			margin-bottom: 10px;
+			text-align: center;
+			ul{
+				li{
+					list-style-type: none;
+				}
+			}
+		}
+	}
+}
+
+
+section{
+	@include grid-row();
+}
+
+#time{
+	// @include grid-row();
+	ul{
+		li{
+			@include grid-col(4);
+			height: 300px;
+			float: left;
+			border: solid 1px red;
+		}
+	}
+}
+
+#tasks, #overall{
+	@include grid-col(6);
+	height: 200px;
+	float: left;
+	border: solid 1px red;
+}

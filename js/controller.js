@@ -1,7 +1,7 @@
-class {
+class crud {
 
-	constructor{
-		
+	constructor (){
+
 	}
 
 	create(){

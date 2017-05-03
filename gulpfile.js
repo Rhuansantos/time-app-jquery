@@ -48,8 +48,7 @@ gulp.task('serve', () => {
 function swallowError (error) {
 
   console.log(error.toString())
-
-  this.emit('end')
+  //this.emit('end')
 }
 
 gulp.task('default', ['serve'], () => {

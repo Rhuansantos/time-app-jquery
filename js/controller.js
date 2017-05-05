@@ -1,6 +1,6 @@
 class crud {
 
-	constructor (){
+	constructor() {
 
 	}
 

@@ -882,6 +882,14 @@ h1 {
 h2 {
   font-size: 28px; }
 
+header {
+  width: 100%;
+  height: 80px;
+  padding-top: 20px;
+  background-color: black; }
+  header h1 {
+    text-align: center; }
+
 nav {
   width: 25%;
   float: left;
@@ -915,30 +923,36 @@ section {
   section::after {
     clear: both; }
 
-#time ul li {
-  width: 29.16667%;
-  float: left;
-  padding-right: 0.625rem;
-  padding-left: 0.625rem;
-  height: 130px;
-  border-radius: 5px;
-  margin-left: 50px;
-  float: left; }
-  @media print, screen and (min-width: 40em) {
-    #time ul li {
-      padding-right: 0.9375rem;
-      padding-left: 0.9375rem; } }
-  #time ul li:last-child:not(:first-child) {
-    float: right; }
-
-#time ul li:nth-child(1) {
-  background: #ff9933; }
-
-#time ul li:nth-child(2) {
-  background: #ff6666; }
-
-#time ul li:nth-child(3) {
-  background: #669999; }
+#time {
+  max-width: 75rem;
+  margin-right: auto;
+  margin-left: auto; }
+  #time::before, #time::after {
+    display: table;
+    content: ' '; }
+  #time::after {
+    clear: both; }
+  #time ul li {
+    width: 29.16667%;
+    float: left;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+    height: 80px;
+    border-radius: 5px;
+    margin-left: 4%;
+    float: left; }
+    @media print, screen and (min-width: 40em) {
+      #time ul li {
+        padding-right: 0.9375rem;
+        padding-left: 0.9375rem; } }
+    #time ul li:last-child:not(:first-child) {
+      float: right; }
+  #time ul li:nth-child(1) {
+    background: #ff9933; }
+  #time ul li:nth-child(2) {
+    background: #ff6666; }
+  #time ul li:nth-child(3) {
+    background: #669999; }
 
 #tasks, #overall {
   width: 50%;
@@ -946,7 +960,8 @@ section {
   padding-right: 0.625rem;
   padding-left: 0.625rem;
   height: 200px;
-  float: left; }
+  float: left;
+  border: solid 1px red; }
   @media print, screen and (min-width: 40em) {
     #tasks, #overall {
       padding-right: 0.9375rem;
@@ -959,5 +974,5 @@ section {
     background-color: #003333;
     padding: 30px 0px 0px 0px;
     width: 100%;
-    height: 90px;
+    height: 80px;
     text-transform: uppercase; }

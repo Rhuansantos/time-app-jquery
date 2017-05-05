@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
 const babel = require('babelify');
-const browserify = require('browserify')
+const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 
@@ -54,4 +54,3 @@ function swallowError (error) {
 gulp.task('default', ['serve'], () => {
 
 });
-

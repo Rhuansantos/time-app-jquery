@@ -1,13 +1,14 @@
 // util
 @import 'reset';
-@import 'util/fonts';
 @import 'util/variables';
+@import 'util/fonts';
 
 // framework
 @import 'foundation/foundation';
 @include foundation-grid;
+// @include foundation-everything;
 
 // dashboard files and components
 @import 'base';
 @import 'components/nav';
-
+@import 'dashboard';

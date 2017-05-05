@@ -1,0 +1,12 @@
+body {
+  font-family: museo700;
+  transition: all .5s ease-in-out; }
+
+h1, h2 {
+  color: white; }
+
+h1 {
+  font-size: 32px; }
+
+h2 {
+  font-size: 28px; }

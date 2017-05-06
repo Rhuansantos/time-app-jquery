@@ -6,11 +6,12 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/foundation/foundation.min.js"></script>
+	<script src="https://use.fontawesome.com/ddcafb965a.js"></script>
 
 </head>
 <body>
 	<header>
-		<h1>logo</h1>
+		<h1>CookBook</h1>
 	</header>
  	<!-- <nav>
  		<ul>
@@ -27,17 +28,17 @@
  		</ul>
  	</nav> -->
 
-
-
-
-
-
-
-
-
+<div class="row">
  	<section id="time">
 		<h2>Progress</h2>
- 		<progress></progress>
+
+		<!-- Change the below data attribute to play -->
+		<div class="progress-wrap progress" data-progress-percent="25">
+		  <div class="progress-bar progress">25%</div>
+		</div>
+
+
+ 		<!-- <progress></progress> -->
  		<ul>
  			<li></li>
  			<li></li>
@@ -48,9 +49,21 @@
  	<section id="tasks">
  		<h2>Tasks</h2>
  		<ul>
- 			<li></li>
- 			<li></li>
- 			<li></li>
+ 			<li>
+ 				<input type="checkbox" name="vehicle" value="Bike">
+ 				<input type="text">
+ 				<i class="fa fa-minus-circle" aria-hidden="true"></i>
+			</li>
+ 			<li>
+ 				<input type="checkbox" name="vehicle" value="Bike">
+ 				<input type="text">
+ 				<i class="fa fa-minus-circle" aria-hidden="true"></i>
+			</li>
+ 			<li>
+ 				<input type="checkbox" name="vehicle" value="Bike">
+ 				<input type="text">
+ 				<i class="fa fa-minus-circle" aria-hidden="true"></i>
+			</li>
  		</ul>
  	</section>
 
@@ -58,7 +71,7 @@
  		<h2>Overall</h2>
  		
  	</section>
-
+</div> <!-- //row -->
 
 	<script type="text/javascript" src="build/main.js"></script>
 </body>

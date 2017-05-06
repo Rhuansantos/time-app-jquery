@@ -1,19 +1,42 @@
+.progress {
+  width: 100%;
+  height: 50px;
+  @include grid-col(12);
+
+}
+.progress-wrap {
+  background: #669999;
+  margin: 20px 0;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+    background: white;
+    left: 0;
+    position: absolute;
+    top: 0;
+    font-size: 22px;
+    padding-top: 15px;
+  }
+}
+
+
 #time{
+
 	@include grid-row();
 	ul{
 		li{
 			@include grid-col(3.5);
 			height: 80px;
 			border-radius: 5px;
-			margin-left: 4%;
 			float: left;
-			// border: solid 1px red;
 		}
 		li:nth-child(1){
 			background: $orange;
 		}
 		li:nth-child(2){
 			background: $red;
+			margin-left: 6%;
+			margin-right: 6%;
 		}
 		li:nth-child(3){
 			background: $secondary;
@@ -23,17 +46,52 @@
 
 #tasks, #overall{
 	@include grid-col(6);
-	height: 200px;
+	min-height: 200px;
 	float: left;
-	border: solid 1px red;
-
 	h2{
 		text-align: center;
 		display: block;
+		border-radius: 5px;
 		background-color: #003333;
 		padding: 30px 0px 0px 0px;
 		width: 100%;
 		height: 80px;
 		text-transform: uppercase;
 	}
+
+	ul{
+		li{
+			width: 100%;
+			margin-top: 10px !important;
+			border-bottom-color: white;
+			border-bottom-style: solid;
+		   	border-width: 1px;  
+			height: 50px;
+			// border-radius: 5px;
+			display: block;
+			margin: 0 auto;
+
+			input[type=text]{
+				background: white;
+				color: white;
+				width: 80%;
+				height: 100%;
+				padding: 20px;
+			}
+			input[type=checkBox]{
+
+			}
+
+			.fa-minus-circle{
+				color: $red;
+				margin-left: 5%;
+				font-size: 20px;
+			}
+		}
+	}
 }
+
+
+
+
+

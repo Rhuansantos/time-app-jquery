@@ -1,2 +1,1 @@
-$(document).foundation();
-
+import * as progressBar from './interactions';

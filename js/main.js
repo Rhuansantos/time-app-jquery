@@ -28,7 +28,6 @@ $(document).ready(function($) {
 	$('.deleteTask').click(function(event) {
 
 		let dataKey = $(this).attr('data-id');
-		console.log(dataKey);
 		let deleteTasks = new crud('delete', dataKey);
 
 	});

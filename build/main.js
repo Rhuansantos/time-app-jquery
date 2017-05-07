@@ -27,7 +27,7 @@ var crud = exports.crud = function () {
 	_createClass(crud, [{
 		key: 'create',
 		value: function create() {
-			console.log();
+			// console.log();
 		}
 	}, {
 		key: 'update',
@@ -35,8 +35,10 @@ var crud = exports.crud = function () {
 	}, {
 		key: 'delete',
 		value: function _delete() {
-			console.log('tasks' + this.key);
-			localStorage.removeItem('tasks' + this.key);
+
+			$('[data-id=' + this.key + ']').fadeOut();
+
+			// localStorage.removeItem('tasks'+this.key);
 		}
 	}]);
 
@@ -115,7 +117,6 @@ $(document).ready(function ($) {
 	$('.deleteTask').click(function (event) {
 
 		var dataKey = $(this).attr('data-id');
-		console.log(dataKey);
 		var deleteTasks = new _controller.crud('delete', dataKey);
 	});
 });

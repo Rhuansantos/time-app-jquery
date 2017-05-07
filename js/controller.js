@@ -12,14 +12,16 @@ export class crud {
 		}
 	}
 	create(){
-		console.log();
+		// console.log();
 	}
 	update(){
 
 	}
 	delete(){
-		console.log('tasks'+this.key);
-		localStorage.removeItem('tasks'+this.key);
+		
+		$('[data-id=' + this.key + ']').fadeOut();
+
+		// localStorage.removeItem('tasks'+this.key);
 	}
 
 }

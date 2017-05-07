@@ -104,11 +104,11 @@ $('#addTask').click(function (event) {
 
 var _view = require("./view");
 
+// getting initial data for tasks
 $.getJSON("js/data.json", function (data) {
 
-  $.each(data, function (key, val) {
-    console.log(data.tasks);
-    _view.templates.task(data.tasks[1]);
+  $.each(data.projectTasks, function (key, val) {
+    _view.templates.task(data.projectTasks[key]);
   });
 });
 

@@ -3,10 +3,6 @@ import {templates} from './view';
 
 export class model {
 
-constuctor(){
-	this.tasks = {};
-}
-
 // getting initial data for tasks
 static loadJson(){
 
@@ -29,14 +25,20 @@ static loadJson(){
 
 static loadLocalStorage(){
 
+	try {
+		
 		let getTasks   = localStorage.getItem("tasks");	
 		let getData = JSON.parse(getTasks);
 
   		$.each(getData, function(i, el) {
-	
 			templates.task(i ,el);
-
 		});
+
+	}
+	catch(err) {
+	    console.log(err);
+	}
+
 	}	
 
 }

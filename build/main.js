@@ -93,23 +93,31 @@ var _controller = require('./controller');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-jQuery(document).ready(function ($) {
+$(document).ready(function ($) {
 
+	// if the initial data is not there yet do it
+	if (localStorage.tasks == null) {
+
+		_model.model.loadJson();
+	}
+
+	// print the data
+	_model.model.loadLocalStorage();
+
+	// adding task
 	$('#addTask').click(function (event) {
 
 		var taskVal = $('#add-task').val();
 		var createTasks = new _controller.crud('create');
 	});
 
+	// deleting task
 	$('.deleteTask').click(function (event) {
 
 		var dataKey = $(this).attr('data-id');
 		console.log(dataKey);
 		var deleteTasks = new _controller.crud('delete', dataKey);
 	});
-
-	_model.model.loadJson();
-	_model.model.loadLocalStorage();
 });
 // import {loadJson as localStorage } from './model';
 
@@ -132,16 +140,11 @@ var model = exports.model = function () {
 		_classCallCheck(this, model);
 	}
 
-	_createClass(model, [{
-		key: "constuctor",
-		value: function constuctor() {
-			this.tasks = {};
-		}
+	_createClass(model, null, [{
+		key: "loadJson",
+
 
 		// getting initial data for tasks
-
-	}], [{
-		key: "loadJson",
 		value: function loadJson() {
 
 			var buildObj = {};
@@ -160,13 +163,17 @@ var model = exports.model = function () {
 		key: "loadLocalStorage",
 		value: function loadLocalStorage() {
 
-			var getTasks = localStorage.getItem("tasks");
-			var getData = JSON.parse(getTasks);
+			try {
 
-			$.each(getData, function (i, el) {
+				var getTasks = localStorage.getItem("tasks");
+				var getData = JSON.parse(getTasks);
 
-				_view.templates.task(i, el);
-			});
+				$.each(getData, function (i, el) {
+					_view.templates.task(i, el);
+				});
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	}]);
 
@@ -197,7 +204,7 @@ var templates = exports.templates = function () {
 		key: 'task',
 		value: function task(key, _value) {
 
-			var template = '\n\t\t<li>\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
+			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
 
 			$('#to-do-list').append(template);
 		}

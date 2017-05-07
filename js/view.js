@@ -7,7 +7,7 @@ export class templates {
 	static task (key, _value) {
 
 		let template = `
-		<li>
+		<li data-id="${key}">
 			<input type="text" value="${_value}" disabled>
 			<span data-id="${key}" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>
 		</li>

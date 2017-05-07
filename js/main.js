@@ -5,8 +5,18 @@ import {templates as view} from './view';
 import {crud} from './controller'; 
 
 
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
 
+	// if the initial data is not there yet do it
+	if(localStorage.tasks == null){
+		
+		model.loadJson();
+	}
+
+	// print the data
+	model.loadLocalStorage();
+
+	// adding task
 	$('#addTask').click(function(event) {
 
 		let taskVal = $('#add-task').val();
@@ -14,6 +24,7 @@ jQuery(document).ready(function($) {
 
 	});
 
+	// deleting task
 	$('.deleteTask').click(function(event) {
 
 		let dataKey = $(this).attr('data-id');
@@ -22,8 +33,9 @@ jQuery(document).ready(function($) {
 
 	});
 
-	model.loadJson();
-	model.loadLocalStorage();
+
+
+
 
 
 });

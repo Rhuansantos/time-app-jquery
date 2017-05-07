@@ -1,28 +1,47 @@
 import {templates} from './view'; 
 
-let userTasks = {};
 
+export class model {
+
+constuctor(){
+	this.tasks = {};
+}
 
 // getting initial data for tasks
-$.getJSON( "js/data.json", function( data ) {
+static loadJson(){
 
-  $.each( data.projectTasks, function( key, val ) {
+	let buildObj = {};
 
-  	// console.log(data.projectTasks);
+	$.getJSON( "js/data.json", function( data ) {
 
-  	let storeTasks = localStorage.setItem("tasks"+key+"", JSON.stringify(data.projectTasks[key]));
-  	let getTasks   = localStorage.getItem("tasks"+key+"");
-	let convertTasks = {};
-	convertTasks[key]   = JSON.parse(getTasks);
+	  $.each( data.projectTasks, function( key, val ) {
 
-	console.log(convertTasks);
+	  	buildObj[key] = val;
 
-	$.each(convertTasks, function(i, el) {
+	  });
 
-		templates.task(i ,el);
-
+	  let storeTasks = localStorage.setItem("tasks", JSON.stringify(buildObj));
+	 
 	});
 
-  });
- 
-});
+
+}
+
+static loadLocalStorage(){
+
+		let getTasks   = localStorage.getItem("tasks");	
+		let getData = JSON.parse(getTasks);
+
+  		$.each(getData, function(i, el) {
+	
+			templates.task(i ,el);
+
+		});
+	}	
+
+}
+
+
+
+
+

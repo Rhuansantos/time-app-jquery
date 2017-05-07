@@ -1,15 +1,16 @@
 import * as progressBar from './interactions'; 
-import * as model from './model'; 
-// import * as view from './view';
+// import {loadJson as localStorage } from './model'; 
+import { model} from './model';
 import {templates as view} from './view'; 
 import {crud} from './controller'; 
+
 
 jQuery(document).ready(function($) {
 
 	$('#addTask').click(function(event) {
-	alert('ok');
-	let taskVal = $('#add-task').val();
-	let createTasks = new crud('create');
+
+		let taskVal = $('#add-task').val();
+		let createTasks = new crud('create');
 
 	});
 
@@ -20,6 +21,9 @@ jQuery(document).ready(function($) {
 		let deleteTasks = new crud('delete', dataKey);
 
 	});
+
+	model.loadJson();
+	model.loadLocalStorage();
 
 
 });

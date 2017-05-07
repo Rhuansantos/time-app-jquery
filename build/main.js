@@ -26,7 +26,9 @@ var crud = exports.crud = function () {
 
 	_createClass(crud, [{
 		key: 'create',
-		value: function create() {}
+		value: function create() {
+			console.log();
+		}
 	}, {
 		key: 'update',
 		value: function update() {}
@@ -85,19 +87,16 @@ var progressBar = _interopRequireWildcard(_interactions);
 
 var _model = require('./model');
 
-var model = _interopRequireWildcard(_model);
-
 var _view = require('./view');
 
 var _controller = require('./controller');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-// import * as view from './view';
 jQuery(document).ready(function ($) {
 
 	$('#addTask').click(function (event) {
-		alert('ok');
+
 		var taskVal = $('#add-task').val();
 		var createTasks = new _controller.crud('create');
 	});
@@ -108,35 +107,71 @@ jQuery(document).ready(function ($) {
 		console.log(dataKey);
 		var deleteTasks = new _controller.crud('delete', dataKey);
 	});
+
+	_model.model.loadJson();
+	_model.model.loadLocalStorage();
 });
+// import {loadJson as localStorage } from './model';
 
 },{"./controller":1,"./interactions":2,"./model":4,"./view":5}],4:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.model = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _view = require("./view");
 
-var userTasks = {};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// getting initial data for tasks
-$.getJSON("js/data.json", function (data) {
+var model = exports.model = function () {
+	function model() {
+		_classCallCheck(this, model);
+	}
 
-  $.each(data.projectTasks, function (key, val) {
+	_createClass(model, [{
+		key: "constuctor",
+		value: function constuctor() {
+			this.tasks = {};
+		}
 
-    // console.log(data.projectTasks);
+		// getting initial data for tasks
 
-    var storeTasks = localStorage.setItem("tasks" + key + "", JSON.stringify(data.projectTasks[key]));
-    var getTasks = localStorage.getItem("tasks" + key + "");
-    var convertTasks = {};
-    convertTasks[key] = JSON.parse(getTasks);
+	}], [{
+		key: "loadJson",
+		value: function loadJson() {
 
-    console.log(convertTasks);
+			var buildObj = {};
 
-    $.each(convertTasks, function (i, el) {
+			$.getJSON("js/data.json", function (data) {
 
-      _view.templates.task(i, el);
-    });
-  });
-});
+				$.each(data.projectTasks, function (key, val) {
+
+					buildObj[key] = val;
+				});
+
+				var storeTasks = localStorage.setItem("tasks", JSON.stringify(buildObj));
+			});
+		}
+	}, {
+		key: "loadLocalStorage",
+		value: function loadLocalStorage() {
+
+			var getTasks = localStorage.getItem("tasks");
+			var getData = JSON.parse(getTasks);
+
+			$.each(getData, function (i, el) {
+
+				_view.templates.task(i, el);
+			});
+		}
+	}]);
+
+	return model;
+}();
 
 },{"./view":5}],5:[function(require,module,exports){
 'use strict';

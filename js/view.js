@@ -13,7 +13,7 @@ export class templates {
 		</li>
 		`;
 
-		$('#to-do-list').append(template);
+		$('#to-do-list').prepend(template);
 	}
 
 }

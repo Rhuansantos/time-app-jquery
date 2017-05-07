@@ -1,6 +1,5 @@
 import * as progressBar from './interactions'; 
-// import {loadJson as localStorage } from './model'; 
-import { model} from './model';
+import {model} from './model';
 import {templates as view} from './view'; 
 import {crud} from './controller'; 
 
@@ -8,8 +7,8 @@ import {crud} from './controller';
 $(document).ready(function($) {
 
 	// if the initial data is not there yet do it
-	if(localStorage.tasks == null){
-		
+	if(localStorage.tasks == null || localStorage.tasks == 'undefined'){
+		location.reload();
 		model.loadJson();
 	}
 
@@ -17,18 +16,18 @@ $(document).ready(function($) {
 	model.loadLocalStorage();
 
 	// adding task
-	$('#addTask').click(function(event) {
-
+	$('#addTask').on('click', function(event) {
+		let key = '5';
 		let taskVal = $('#add-task').val();
-		let createTasks = new crud('create');
+		let createTasks = new crud('create', key, taskVal);
 
 	});
 
 	// deleting task
-	$('.deleteTask').click(function(event) {
+	$('.deleteTask').on('click', function(event) {
 
 		let dataKey = $(this).attr('data-id');
-		let deleteTasks = new crud('delete', dataKey);
+		let deleteTasks = new crud('delete', dataKey, null);
 
 	});
 

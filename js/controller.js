@@ -1,8 +1,11 @@
+import {templates} from './view'; 
+
 export class crud {
 
-	constructor(_methods, _key) {
+	constructor(_methods, _key, _value) {
 		this.methods = _methods;
 		this.key = _key;
+		this.value = _value;
 
 		if(this.methods === 'create'){
 			this.create();
@@ -12,7 +15,23 @@ export class crud {
 		}
 	}
 	create(){
-		// console.log();
+
+		// temporary array to push the information
+		let data = [];
+
+		// new array to restore everything
+		let newTasks = [];
+		newTasks = this.value;
+		
+		data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+
+		// storing the data
+		let storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+
+		// print result
+		templates.task(this.key, this.value);
+
+
 	}
 	update(){
 

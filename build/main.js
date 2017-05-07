@@ -4,17 +4,21 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.crud = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _view = require('./view');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var crud = exports.crud = function () {
-	function crud(_methods, _key) {
+	function crud(_methods, _key, _value) {
 		_classCallCheck(this, crud);
 
 		this.methods = _methods;
 		this.key = _key;
+		this.value = _value;
 
 		if (this.methods === 'create') {
 			this.create();
@@ -27,7 +31,21 @@ var crud = exports.crud = function () {
 	_createClass(crud, [{
 		key: 'create',
 		value: function create() {
-			// console.log();
+
+			// temporary array to push the information
+			var data = [];
+
+			// new array to restore everything
+			var newTasks = [];
+			newTasks = this.value;
+
+			data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+
+			// storing the data
+			var storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+
+			// print result
+			_view.templates.task(this.key, this.value);
 		}
 	}, {
 		key: 'update',
@@ -45,7 +63,7 @@ var crud = exports.crud = function () {
 	return crud;
 }();
 
-},{}],2:[function(require,module,exports){
+},{"./view":5}],2:[function(require,module,exports){
 'use strict';
 
 // ========================= Progress Bar =========================
@@ -98,8 +116,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 $(document).ready(function ($) {
 
 	// if the initial data is not there yet do it
-	if (localStorage.tasks == null) {
-
+	if (localStorage.tasks == null || localStorage.tasks == 'undefined') {
+		location.reload();
 		_model.model.loadJson();
 	}
 
@@ -107,20 +125,19 @@ $(document).ready(function ($) {
 	_model.model.loadLocalStorage();
 
 	// adding task
-	$('#addTask').click(function (event) {
-
+	$('#addTask').on('click', function (event) {
+		var key = '5';
 		var taskVal = $('#add-task').val();
-		var createTasks = new _controller.crud('create');
+		var createTasks = new _controller.crud('create', key, taskVal);
 	});
 
 	// deleting task
-	$('.deleteTask').click(function (event) {
+	$('.deleteTask').on('click', function (event) {
 
 		var dataKey = $(this).attr('data-id');
-		var deleteTasks = new _controller.crud('delete', dataKey);
+		var deleteTasks = new _controller.crud('delete', dataKey, null);
 	});
 });
-// import {loadJson as localStorage } from './model';
 
 },{"./controller":1,"./interactions":2,"./model":4,"./view":5}],4:[function(require,module,exports){
 "use strict";
@@ -169,7 +186,17 @@ var model = exports.model = function () {
 				var getTasks = localStorage.getItem("tasks");
 				var getData = JSON.parse(getTasks);
 
+				var newGetTasks = localStorage.getItem("new-tasks");
+				var newGetData = JSON.parse(newGetTasks);
+
+				// from JSON
 				$.each(getData, function (i, el) {
+					_view.templates.task(i, el);
+				});
+
+				// from localStorage
+				$.each(newGetData, function (i, el) {
+					console.log(i, el);
 					_view.templates.task(i, el);
 				});
 			} catch (err) {
@@ -207,7 +234,7 @@ var templates = exports.templates = function () {
 
 			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
 
-			$('#to-do-list').append(template);
+			$('#to-do-list').prepend(template);
 		}
 	}]);
 

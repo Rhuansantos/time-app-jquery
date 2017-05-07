@@ -27,11 +27,21 @@ static loadLocalStorage(){
 
 	try {
 		
-		let getTasks   = localStorage.getItem("tasks");	
-		let getData = JSON.parse(getTasks);
+		let getTasks   	= localStorage.getItem("tasks");	
+		let getData 	= JSON.parse(getTasks);
 
+		let newGetTasks = localStorage.getItem("new-tasks");	
+		let newGetData 	= JSON.parse(newGetTasks);
+
+		// from JSON
   		$.each(getData, function(i, el) {
 			templates.task(i ,el);
+		});
+
+  		// from localStorage
+  		$.each(newGetData, function(i, el) {
+  			console.log(i, el);
+			templates.task(i, el);
 		});
 
 	}

@@ -1,3 +1,4 @@
+// ========================= Progress Bar =========================
 // on page load...
     moveProgressBar();
     $(window).resize(function() {
@@ -15,3 +16,17 @@
             left: progressTotal
         }, animationLength);
     }
+
+// ========================= Progress Bar =========================
+
+
+// ========================= modal =========================
+$('#layer').click(function(event) {
+    /* Act on the event */
+    // alert('ok');
+    $('#modal').fadeOut();
+    $('#layer').fadeOut();
+
+});
+
+// ========================= modal =========================

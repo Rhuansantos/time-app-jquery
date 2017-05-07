@@ -41,6 +41,8 @@ var crud = exports.crud = function () {
 
 			data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
 
+			data.task.push(newTasks);
+
 			// storing the data
 			var storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
 
@@ -129,6 +131,7 @@ $(document).ready(function ($) {
 		var key = '5';
 		var taskVal = $('#add-task').val();
 		var createTasks = new _controller.crud('create', key, taskVal);
+		$('#add-task').val('');
 	});
 
 	// deleting task

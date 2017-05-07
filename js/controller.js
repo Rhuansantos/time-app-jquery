@@ -25,6 +25,8 @@ export class crud {
 		
 		data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
 
+		data.task.push(newTasks);
+
 		// storing the data
 		let storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
 

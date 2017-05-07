@@ -20,6 +20,7 @@ $(document).ready(function($) {
 		let key = '5';
 		let taskVal = $('#add-task').val();
 		let createTasks = new crud('create', key, taskVal);
+		$('#add-task').val('');
 
 	});
 

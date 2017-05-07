@@ -1,23 +1,25 @@
 export class crud {
 
-	constructor(_methods, _view, _value) {
+	constructor(_methods, _key) {
 		this.methods = _methods;
-		this.view = _view;
-		this.value = _value;
+		this.key = _key;
 
 		if(this.methods === 'create'){
 			this.create();
 		}
+		if(this.methods === 'delete'){
+			this.delete();
+		}
 	}
 	create(){
-		// console.log('oi eu sou um valor', this.value);
-		$('#to-do-list').append(this.view);
+
 	}
 	update(){
 
 	}
 	delete(){
-
+		console.log('tasks'+this.key);
+		localStorage.removeItem('tasks'+this.key);
 	}
 
 }

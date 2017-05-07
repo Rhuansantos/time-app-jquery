@@ -10,30 +10,32 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var crud = exports.crud = function () {
-	function crud(_methods, _view, _value) {
+	function crud(_methods, _key) {
 		_classCallCheck(this, crud);
 
 		this.methods = _methods;
-		this.view = _view;
-		this.value = _value;
+		this.key = _key;
 
 		if (this.methods === 'create') {
 			this.create();
+		}
+		if (this.methods === 'delete') {
+			this.delete();
 		}
 	}
 
 	_createClass(crud, [{
 		key: 'create',
-		value: function create() {
-			// console.log('oi eu sou um valor', this.value);
-			$('#to-do-list').append(this.view);
-		}
+		value: function create() {}
 	}, {
 		key: 'update',
 		value: function update() {}
 	}, {
 		key: 'delete',
-		value: function _delete() {}
+		value: function _delete() {
+			console.log('tasks' + this.key);
+			localStorage.removeItem('tasks' + this.key);
+		}
 	}]);
 
 	return crud;
@@ -85,30 +87,54 @@ var _model = require('./model');
 
 var model = _interopRequireWildcard(_model);
 
+var _view = require('./view');
+
 var _controller = require('./controller');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var task = $('#add-task').val();
 // import * as view from './view';
-// import {templates} from './view'; 
+jQuery(document).ready(function ($) {
 
+	$('#addTask').click(function (event) {
+		alert('ok');
+		var taskVal = $('#add-task').val();
+		var createTasks = new _controller.crud('create');
+	});
 
-$('#addTask').click(function (event) {
-	// let task = $('#add-task').val();
-	var createTask = new _controller.crud('create', view.template.task, task);
+	$('.deleteTask').click(function (event) {
+
+		var dataKey = $(this).attr('data-id');
+		console.log(dataKey);
+		var deleteTasks = new _controller.crud('delete', dataKey);
+	});
 });
 
-},{"./controller":1,"./interactions":2,"./model":4}],4:[function(require,module,exports){
+},{"./controller":1,"./interactions":2,"./model":4,"./view":5}],4:[function(require,module,exports){
 "use strict";
 
 var _view = require("./view");
+
+var userTasks = {};
 
 // getting initial data for tasks
 $.getJSON("js/data.json", function (data) {
 
   $.each(data.projectTasks, function (key, val) {
-    _view.templates.task(data.projectTasks[key]);
+
+    // console.log(data.projectTasks);
+
+    var storeTasks = localStorage.setItem("tasks" + key + "", JSON.stringify(data.projectTasks[key]));
+    var getTasks = localStorage.getItem("tasks" + key + "");
+    var convertTasks = {};
+    convertTasks[key] = JSON.parse(getTasks);
+
+    console.log(convertTasks);
+
+    $.each(convertTasks, function (i, el) {
+
+      _view.templates.task(i, el);
+    });
   });
 });
 
@@ -134,9 +160,9 @@ var templates = exports.templates = function () {
 
 	_createClass(templates, null, [{
 		key: 'task',
-		value: function task(_value) {
-			console.log('method task loaded', _value);
-			var template = '\n\t\t<li>\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<i class="fa fa-minus-circle" aria-hidden="true"></i>\n\t\t</li>\n\t\t';
+		value: function task(key, _value) {
+
+			var template = '\n\t\t<li>\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
 
 			$('#to-do-list').append(template);
 		}

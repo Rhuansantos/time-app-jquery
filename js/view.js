@@ -4,12 +4,12 @@ let taskInput = $('#add-task').val();
 
 export class templates {
 	
-	static task (_value) {
-		console.log('method task loaded', _value);
+	static task (key, _value) {
+
 		let template = `
 		<li>
 			<input type="text" value="${_value}" disabled>
-			<i class="fa fa-minus-circle" aria-hidden="true"></i>
+			<span data-id="${key}" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>
 		</li>
 		`;
 

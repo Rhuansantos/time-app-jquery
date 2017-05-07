@@ -10,13 +10,14 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var crud = exports.crud = function () {
-	function crud(_methods, _view) {
+	function crud(_methods, _view, _value) {
 		_classCallCheck(this, crud);
 
 		this.methods = _methods;
 		this.view = _view;
+		this.value = _value;
 
-		if (this.methods == 'create') {
+		if (this.methods === 'create') {
 			this.create();
 		}
 	}
@@ -24,6 +25,7 @@ var crud = exports.crud = function () {
 	_createClass(crud, [{
 		key: 'create',
 		value: function create() {
+			// console.log('oi eu sou um valor', this.value);
 			$('#to-do-list').append(this.view);
 		}
 	}, {
@@ -79,28 +81,68 @@ var _interactions = require('./interactions');
 
 var progressBar = _interopRequireWildcard(_interactions);
 
-var _view = require('./view');
+var _model = require('./model');
 
-var view = _interopRequireWildcard(_view);
+var model = _interopRequireWildcard(_model);
 
 var _controller = require('./controller');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var createTask = new _controller.crud('create', view.template.task);
+var task = $('#add-task').val();
+// import * as view from './view';
+// import {templates} from './view'; 
 
-},{"./controller":1,"./interactions":2,"./view":4}],4:[function(require,module,exports){
+
+$('#addTask').click(function (event) {
+	// let task = $('#add-task').val();
+	var createTask = new _controller.crud('create', view.template.task, task);
+});
+
+},{"./controller":1,"./interactions":2,"./model":4}],4:[function(require,module,exports){
 "use strict";
+
+var _view = require("./view");
+
+$.getJSON("js/data.json", function (data) {
+
+  $.each(data, function (key, val) {
+    console.log(data.tasks);
+    _view.templates.task(data.tasks[1]);
+  });
+});
+
+},{"./view":5}],5:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var template = {};
 
-template.task = "\n\t<li>1</li>\n\t<li>2</li>\n\t<li>3</li>\n";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-template.client = "\n\t<li>1</li>\n\t<li>2</li>\n\t<li>3</li>\n";
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-exports.template = template;
+// const template = {};
+
+var taskInput = $('#add-task').val();
+
+var templates = exports.templates = function () {
+	function templates() {
+		_classCallCheck(this, templates);
+	}
+
+	_createClass(templates, null, [{
+		key: 'task',
+		value: function task(_value) {
+			console.log('method task loaded', _value);
+			var template = '\n\t\t<li>\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<i class="fa fa-minus-circle" aria-hidden="true"></i>\n\t\t</li>\n\t\t';
+
+			$('#to-do-list').append(template);
+		}
+	}]);
+
+	return templates;
+}();
 
 },{}]},{},[3]);

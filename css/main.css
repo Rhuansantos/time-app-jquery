@@ -1081,15 +1081,22 @@ section {
       color: #ff6666;
       margin-left: 5%;
       font-size: 20px; }
-
-#add-task {
-  width: 100%;
-  height: 80px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  color: white;
-  border-radius: 5px;
-  background: #669999;
-  padding: 20px; }
-  #add-task::placeholder {
-    color: white; }
+  #tasks p, #overall p {
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: #669999; }
+    #tasks p #add-task, #overall p #add-task {
+      padding: 20px;
+      width: 90%;
+      height: 100%;
+      color: white;
+      background: none; }
+      #tasks p #add-task::placeholder, #overall p #add-task::placeholder {
+        color: white; }
+    #tasks p .fa-plus-circle, #overall p .fa-plus-circle {
+      font-size: 38px;
+      position: relative;
+      top: 10px; }

@@ -1,12 +1,14 @@
 body{
 	background-color: $primary;
-	font-family: museo700;
+	// font-family: museo700;
+	font-family: $regular;
 
     transition:all .5s ease-in-out;
 }
 
-h1, h2{
+h1, h2, h3{
 	color: white;
+	font-family: $bold;
 }
 
 h1{

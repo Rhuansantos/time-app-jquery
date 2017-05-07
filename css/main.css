@@ -870,11 +870,12 @@ table {
 
 body {
   background-color: #006666;
-  font-family: museo700;
+  font-family: museo300;
   transition: all .5s ease-in-out; }
 
-h1, h2 {
-  color: white; }
+h1, h2, h3 {
+  color: white;
+  font-family: museo700; }
 
 h1 {
   font-size: 32px; }
@@ -974,6 +975,15 @@ section {
         padding-left: 0.9375rem; } }
     #time ul li:last-child:not(:first-child) {
       float: right; }
+    #time ul li h3 {
+      padding: 15px;
+      color: white;
+      font-size: 24px; }
+      #time ul li h3 span {
+        padding-top: 5px;
+        display: block;
+        font-size: 18px;
+        font-family: museo300; }
   #time ul li:nth-child(1) {
     background: #ff9933; }
   #time ul li:nth-child(2) {
@@ -983,13 +993,22 @@ section {
   #time ul li:nth-child(3) {
     background: #669999; }
 
+#tasks h2 {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; }
+
+#overall h2 {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
 #tasks, #overall {
   width: 50%;
   float: left;
   padding-right: 0.625rem;
   padding-left: 0.625rem;
   min-height: 200px;
-  float: left; }
+  float: left;
+  padding: 0 !important; }
   @media print, screen and (min-width: 40em) {
     #tasks, #overall {
       padding-right: 0.9375rem;
@@ -999,7 +1018,6 @@ section {
   #tasks h2, #overall h2 {
     text-align: center;
     display: block;
-    border-radius: 5px;
     background-color: #003333;
     padding: 30px 0px 0px 0px;
     width: 100%;
@@ -1014,13 +1032,28 @@ section {
     height: 50px;
     display: block;
     margin: 0 auto; }
-    #tasks ul li input[type=text], #overall ul li input[type=text] {
-      background: white;
+    #tasks ul li input[type='text'], #overall ul li input[type='text'] {
+      background: none;
       color: white;
-      width: 80%;
+      width: 90%;
       height: 100%;
       padding: 20px; }
+    #tasks ul li input:focus, #overall ul li input:focus {
+      outline: none; }
     #tasks ul li .fa-minus-circle, #overall ul li .fa-minus-circle {
       color: #ff6666;
       margin-left: 5%;
       font-size: 20px; }
+
+#add-task {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: white;
+  border-radius: 5px;
+  background: #669999;
+  padding: 20px; }
+
+#add-task::placeholder {
+  color: white; }

@@ -39,12 +39,12 @@ var crud = exports.crud = function () {
 			var newTasks = [];
 			newTasks = this.value;
 
-			data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+			data.task = JSON.parse(localStorage.getItem('tasks')) || [];
 
 			data.task.push(newTasks);
 
 			// storing the data
-			var storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+			var storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 
 			// print result
 			_view.templates.task(this.key, this.value);
@@ -58,18 +58,13 @@ var crud = exports.crud = function () {
 
 			var data = [];
 
-			// data.newTask = JSON.parse(localStorage.getItem('tasks')) || [];
-			// data.task = JSON.parse(localStorage.removeItem('new-tasks'));
-
-			data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+			data.task = JSON.parse(localStorage.getItem('tasks')) || [];
 
 			data.task.splice(this.key, 1);
 
-			var storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+			var storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 
 			$('[data-id=' + this.key + ']').fadeOut();
-
-			// localStorage.removeItem('tasks'+this.key);
 		}
 	}]);
 
@@ -179,13 +174,14 @@ var model = exports.model = function () {
 		// getting initial data for tasks
 		value: function loadJson() {
 
-			var buildObj = {};
+			var buildObj = [];
 
 			$.getJSON("js/data.json", function (data) {
 
 				$.each(data.projectTasks, function (key, val) {
 
 					buildObj[key] = val;
+					// buildObj.data = val;
 				});
 
 				var storeTasks = localStorage.setItem("tasks", JSON.stringify(buildObj));
@@ -200,17 +196,8 @@ var model = exports.model = function () {
 				var getTasks = localStorage.getItem("tasks");
 				var getData = JSON.parse(getTasks);
 
-				var newGetTasks = localStorage.getItem("new-tasks");
-				var newGetData = JSON.parse(newGetTasks);
-
 				// from JSON
 				$.each(getData, function (i, el) {
-					_view.templates.task(i, el);
-				});
-
-				// from localStorage
-				$.each(newGetData, function (i, el) {
-					console.log(i, el);
 					_view.templates.task(i, el);
 				});
 			} catch (err) {

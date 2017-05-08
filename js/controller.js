@@ -23,12 +23,12 @@ export class crud {
 		let newTasks = [];
 		newTasks = this.value;
 		
-		data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+		data.task = JSON.parse(localStorage.getItem('tasks')) || [];
 
 		data.task.push(newTasks);
 
 		// storing the data
-		let storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+		let storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 
 		// print result
 		templates.task(this.key, this.value);
@@ -42,18 +42,14 @@ export class crud {
 
 		let data = [];
 
-		// data.newTask = JSON.parse(localStorage.getItem('tasks')) || [];
-		// data.task = JSON.parse(localStorage.removeItem('new-tasks'));
-
-		data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+		data.task = JSON.parse(localStorage.getItem('tasks')) || [];
 
 		data.task.splice(this.key, 1);
 
-		let storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
+		let storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 		
 		$('[data-id=' + this.key + ']').fadeOut();
 
-		// localStorage.removeItem('tasks'+this.key);
 	}
 
 }

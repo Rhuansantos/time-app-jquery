@@ -39,6 +39,17 @@ export class crud {
 
 	}
 	delete(){
+
+		let data = [];
+
+		// data.newTask = JSON.parse(localStorage.getItem('tasks')) || [];
+		// data.task = JSON.parse(localStorage.removeItem('new-tasks'));
+
+		data.task = JSON.parse(localStorage.getItem('new-tasks')) || [];
+
+		data.task.splice(this.key, 1);
+
+		let storeTasks = localStorage.setItem("new-tasks", JSON.stringify(data.task));
 		
 		$('[data-id=' + this.key + ']').fadeOut();
 

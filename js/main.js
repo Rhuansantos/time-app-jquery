@@ -1,7 +1,7 @@
-import * as progressBar from './interactions'; 
+import * as progressBar from './interactions';
 import {model} from './model';
-import {templates as view} from './view'; 
-import {crud} from './controller'; 
+import {templates as view} from './view';
+import {crud} from './controller';
 
 
 $(document).ready(function($) {
@@ -38,4 +38,3 @@ $(document).ready(function($) {
 
 
 });
-

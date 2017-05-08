@@ -141,7 +141,7 @@ $(document).ready(function ($) {
 	});
 
 	// deleting task
-	$('.deleteTask').on('click', function (event) {
+	$($).on('click', '.deleteTask', function (event) {
 
 		var dataKey = $(this).attr('data-id');
 		var deleteTasks = new _controller.crud('delete', dataKey, null);

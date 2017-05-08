@@ -887,16 +887,21 @@ table {
   display: none;
   background: white;
   position: fixed;
-  width: 25vw;
+  width: 500px;
+  margin: 0 auto;
   height: 100px;
   left: 0;
   right: 0;
   border: 5px;
-  margin: 40vh 40vw;
+  margin-top: 40vh;
   z-index: 400;
   top: 30px;
   padding-left: 3rem;
   padding-right: 3rem; }
+  @media screen and (max-width: 37.5em) {
+    #delete-confirmation {
+      width: 100%;
+      height: 170px; } }
   #delete-confirmation h4 {
     color: black;
     padding-top: 15px;
@@ -919,6 +924,20 @@ table {
         padding-left: 0.9375rem; } }
     #delete-confirmation button:last-child:not(:first-child) {
       float: right; }
+    @media screen and (max-width: 37.5em) {
+      #delete-confirmation button {
+        width: 100%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem;
+        margin-bottom: 10px; } }
+  @media screen and (max-width: 37.5em) and (min-width: 40em) {
+    #delete-confirmation button {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+    @media screen and (max-width: 37.5em) {
+        #delete-confirmation button:last-child:not(:first-child) {
+          float: right; } }
   #delete-confirmation button:nth-child(3) {
     background: #669999; }
   #delete-confirmation button:nth-child(2) {
@@ -1008,6 +1027,22 @@ section {
       padding-left: 0.9375rem; } }
   .progress:last-child:not(:first-child) {
     float: right; }
+  @media screen and (max-width: 78.125em) {
+    .progress {
+      width: 91.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      left: 5%;
+      right: 5%;
+      margin-bottom: 20px; } }
+  @media screen and (max-width: 78.125em) and (min-width: 40em) {
+    .progress {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+  @media screen and (max-width: 78.125em) {
+      .progress:last-child:not(:first-child) {
+        float: right; } }
 
 .progress-wrap {
   background: #669999;
@@ -1035,7 +1070,9 @@ section {
     clear: both; }
   #time h2 {
     margin-top: 30px;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    margin-left: 5%;
+    margin-right: 5%; }
   #time ul li {
     width: 29.16667%;
     float: left;
@@ -1050,6 +1087,23 @@ section {
         padding-left: 0.9375rem; } }
     #time ul li:last-child:not(:first-child) {
       float: right; }
+    @media screen and (max-width: 78.125em) {
+      #time ul li {
+        width: 91.66667%;
+        float: left;
+        padding-right: 0.625rem;
+        padding-left: 0.625rem;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 20px;
+        clear: both; } }
+  @media screen and (max-width: 78.125em) and (min-width: 40em) {
+    #time ul li {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+    @media screen and (max-width: 78.125em) {
+        #time ul li:last-child:not(:first-child) {
+          float: right; } }
     #time ul li h3 {
       padding: 15px;
       color: white;
@@ -1065,8 +1119,15 @@ section {
     background: #ff6666;
     margin-left: 6%;
     margin-right: 6%; }
+    @media screen and (max-width: 78.125em) {
+      #time ul li:nth-child(2) {
+        margin-left: 5%;
+        margin-right: 5%; } }
   #time ul li:nth-child(3) {
     background: #669999; }
+    @media screen and (max-width: 78.125em) {
+      #time ul li:nth-child(3) {
+        margin-right: 3%; } }
 
 #tasks h2 {
   border-top-left-radius: 5px;
@@ -1075,6 +1136,13 @@ section {
 #overall h2 {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px; }
+
+#overall img {
+  display: block;
+  margin: 0 auto; }
+  @media screen and (max-width: 37.5em) {
+    #overall img {
+      width: 80%; } }
 
 #tasks, #overall {
   width: 50%;
@@ -1090,6 +1158,21 @@ section {
       padding-left: 0.9375rem; } }
   #tasks:last-child:not(:first-child), #overall:last-child:not(:first-child) {
     float: right; }
+  @media screen and (max-width: 78.125em) {
+    #tasks, #overall {
+      width: 91.66667%;
+      float: left;
+      padding-right: 0.625rem;
+      padding-left: 0.625rem;
+      margin-left: 5%;
+      margin-right: 5%; } }
+  @media screen and (max-width: 78.125em) and (min-width: 40em) {
+    #tasks, #overall {
+      padding-right: 0.9375rem;
+      padding-left: 0.9375rem; } }
+  @media screen and (max-width: 78.125em) {
+      #tasks:last-child:not(:first-child), #overall:last-child:not(:first-child) {
+        float: right; } }
   #tasks h2, #overall h2 {
     text-align: center;
     display: block;
@@ -1114,6 +1197,9 @@ section {
       width: 90%;
       height: 100%;
       padding: 20px; }
+    @media screen and (max-width: 78.125em) {
+      #tasks ul li input[type='text'], #overall ul li input[type='text'] {
+        width: 80%; } }
     #tasks ul li input:focus, #overall ul li input:focus {
       outline: none; }
     #tasks ul li span, #overall ul li span {
@@ -1138,6 +1224,9 @@ section {
       background: none; }
       #tasks p #add-task::placeholder, #overall p #add-task::placeholder {
         color: white; }
+    @media screen and (max-width: 78.125em) {
+      #tasks p #add-task, #overall p #add-task {
+        width: 84%; } }
     #tasks p .fa-plus-circle, #overall p .fa-plus-circle {
       font-size: 38px;
       position: relative;

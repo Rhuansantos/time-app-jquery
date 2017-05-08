@@ -15,6 +15,13 @@
   height: 50px;
   @include grid-col(12);
 
+	@include breakpoint(1250px down) {
+		@include grid-col(11);
+		left: 5%;
+		right: 5%;
+		margin-bottom: 20px;
+	}
+
 }
 .progress-wrap {
   background: #669999;
@@ -40,6 +47,13 @@
 	h2{
 		margin-top: 30px;
 		text-transform: uppercase;
+
+		margin-left: 5%;
+		margin-right: 5%;
+
+		@include breakpoint(1250px down) {
+
+		}
 	}
 	ul{
 		li{
@@ -47,6 +61,14 @@
 			height: 80px;
 			border-radius: 5px;
 			float: left;
+
+			@include breakpoint(1250px down) {
+				@include grid-col(11);
+				margin-left: 5%;
+				margin-right: 5%;
+				margin-bottom: 20px;
+				clear: both;
+			}
 
 			h3{
 				padding: 15px;
@@ -67,9 +89,17 @@
 			background: $red;
 			margin-left: 6%;
 			margin-right: 6%;
+
+				@include breakpoint(1250px down) {
+					margin-left: 5%;
+					margin-right: 5%;
+				}
 		}
 		li:nth-child(3){
 			background: $secondary;
+				@include breakpoint(1250px down) {
+						margin-right: 3%;
+				}
 		}
 	}
 }
@@ -82,12 +112,30 @@
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+#overall{
+	img{
+		
+		display: block;
+		margin: 0 auto;
+			@include breakpoint(600px down) {
+				width: 80%;
+			}
+	}
+
+}
 
 #tasks, #overall{
+
 	@include grid-col(6);
 	min-height: 200px;
 	float: left;
 	padding: 0 !important;
+
+	@include breakpoint(1250px down) {
+		@include grid-col(11);
+		margin-left: 5%;
+		margin-right: 5%;
+	}
 	h2{
 		text-align: center;
 		display: block;
@@ -110,12 +158,20 @@
 			display: block;
 			margin: 0 auto;
 
+
 			input[type='text']{
 				background: none;
 				color: white;
 				width: 90%;
 				height: 100%;
 				padding: 20px;
+			}
+
+
+			@include breakpoint(1250px down) {
+				input[type='text']{
+					width: 80%;
+				}	
 			}
 			input:focus{
     			outline: none;
@@ -148,6 +204,12 @@
 			&::placeholder {
 				color: white;
 			}
+		}
+
+		@include breakpoint(1250px down) {
+			#add-task{
+				width: 84%;
+			}	
 		}
 
 		.fa-plus-circle{

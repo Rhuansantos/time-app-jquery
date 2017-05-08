@@ -47,8 +47,19 @@ $(document).ready(function($) {
 		$('#delete-yes').click(function(event) {
 
 			let deleteTasks = new crud('delete', dataKey, null);
-	      	$('#delete-confirmation').fadeOut();
-      		$('#layer').fadeOut();
+
+			$('#delete-confirmation').addClass('animated hinge').delay(1200).queue(function(next){
+
+			    $('#delete-confirmation').hide();
+			    $('#delete-confirmation').removeClass("animated hinge");
+
+			    next();
+			});;
+
+	
+      			$('#layer').fadeOut(1200);
+
+
 
 
 		});

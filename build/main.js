@@ -104,12 +104,20 @@ function modal() {
 
     $('#delete-confirmation').fadeIn();
     $('#layer').fadeIn();
+    $('#delete-confirmation').addClass('animated shake');
 }
 
 $('#layer, #delete-no').click(function (event) {
 
-    $('#delete-confirmation').fadeOut();
-    $('#layer').fadeOut();
+    $('#delete-confirmation').addClass('animated hinge').delay(1200).queue(function (next) {
+
+        $('#delete-confirmation').hide();
+        $('#delete-confirmation').removeClass("animated hinge");
+
+        next();
+    });;
+
+    $('#layer').fadeOut(1200);
 });
 
 exports.modal = modal;
@@ -169,8 +177,16 @@ $(document).ready(function ($) {
 		$('#delete-yes').click(function (event) {
 
 			var deleteTasks = new _controller.crud('delete', dataKey, null);
-			$('#delete-confirmation').fadeOut();
-			$('#layer').fadeOut();
+
+			$('#delete-confirmation').addClass('animated hinge').delay(1200).queue(function (next) {
+
+				$('#delete-confirmation').hide();
+				$('#delete-confirmation').removeClass("animated hinge");
+
+				next();
+			});;
+
+			$('#layer').fadeOut(1200);
 		});
 	});
 });

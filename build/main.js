@@ -71,7 +71,7 @@ var crud = exports.crud = function () {
 	return crud;
 }();
 
-},{"./view":5}],2:[function(require,module,exports){
+},{"./view":6}],2:[function(require,module,exports){
 'use strict';
 
 // ========================= Progress Bar =========================
@@ -113,6 +113,8 @@ var _interactions = require('./interactions');
 
 var progressBar = _interopRequireWildcard(_interactions);
 
+var _validationForm = require('./validationForm');
+
 var _model = require('./model');
 
 var _view = require('./view');
@@ -132,8 +134,14 @@ $(document).ready(function ($) {
 	// print the data
 	_model.model.loadLocalStorage();
 
-	// adding task
-	$('#addTask').on('click', function (event) {
+	$('#addTask').click(function (event) {
+
+		var taskInput = $('#add-task').val();
+
+		// instanciate inputs
+		var validateName = new _validationForm.validationForm(taskInput, 'text');
+		var inputFeedback = _validationForm.validationForm.feedback();
+
 		var key = '5';
 		var taskVal = $('#add-task').val();
 		var createTasks = new _controller.crud('create', key, taskVal);
@@ -148,7 +156,7 @@ $(document).ready(function ($) {
 	});
 });
 
-},{"./controller":1,"./interactions":2,"./model":4,"./view":5}],4:[function(require,module,exports){
+},{"./controller":1,"./interactions":2,"./model":4,"./validationForm":5,"./view":6}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -209,7 +217,72 @@ var model = exports.model = function () {
 	return model;
 }();
 
-},{"./view":5}],5:[function(require,module,exports){
+},{"./view":6}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var validationForm = exports.validationForm = function () {
+    function validationForm(input, type) {
+        _classCallCheck(this, validationForm);
+
+        this.input = input;
+        this.type = type;
+
+        var exec = this.verifyErrors();
+
+        console.log('hey', this.input);
+    }
+
+    _createClass(validationForm, [{
+        key: 'verifyErrors',
+        value: function verifyErrors() {
+
+            var status = this.input;
+
+            if (this.type == 'text') {
+
+                if (status.length < 3) {
+                    $(".alert").fadeIn();
+                    $(".alert").append('this value is too short');
+                }
+                if (status.length > 50) {
+                    $(".alert").fadeIn();
+                    $(".alert").append('this value is too long');
+                }
+
+                if (status.length > 3 && status.length < 50) {
+                    $(".alert").fadeOut();
+                    validationForm.feedback('ok');
+                }
+            }
+        }
+    }], [{
+        key: 'feedback',
+        value: function feedback(error) {
+
+            var inputStatus = error;
+
+            console.log('daqui', inputStatus);
+
+            if (inputStatus !== 'ok') {
+                return 'error';
+            } else {
+                return 'ok';
+            }
+        }
+    }]);
+
+    return validationForm;
+}();
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

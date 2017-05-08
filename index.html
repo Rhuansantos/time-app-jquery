@@ -67,10 +67,15 @@
 
  	<section id="tasks">
  		<h2>Tasks</h2>
+		<span class="alert" style="display:none"></span>
  		<p>
- 			<input type="text" id="add-task" placeholder="type here to add a task">
- 			<i class="fa fa-plus-circle" id="addTask" aria-hidden="true"></i>
+
+ 			<input type="text" id="add-task" placeholder="type here to add a task" minlength="3" maxlength="50" required>
+ 			<i id="addTask" class="fa fa-plus-circle" id="addTask" aria-hidden="true" ></i>
+
  		</p>
+
+
  		<ul id="to-do-list">
 <!--  			<li>
  				<input type="text">

@@ -1,4 +1,5 @@
 import * as progressBar from './interactions';
+import {validationForm} from './validationForm';
 import {model} from './model';
 import {templates as view} from './view';
 import {crud} from './controller';
@@ -15,19 +16,29 @@ $(document).ready(function($) {
 	// print the data
 	model.loadLocalStorage();
 
-	// adding task
-	$('#addTask').on('click', function(event) {
-		let key = '5';
-		let taskVal = $('#add-task').val();
-		let createTasks = new crud('create', key, taskVal);
-		$('#add-task').val('');
 
-	});
+    $('#addTask').click(function(event) {
+
+        const taskInput = $('#add-task').val();
+
+        // instanciate inputs
+        let validateName = new validationForm(taskInput, 'text');
+       	let inputFeedback = validationForm.feedback();
+
+
+		 let key = '5';
+		 let taskVal = $('#add-task').val();
+		 let createTasks = new crud('create', key, taskVal);
+		 $('#add-task').val('');
+     
+
+
+    });
 
 	// deleting task
 	$($).on('click', '.deleteTask', function(event) {
 
-		let dataKey =  $(this).attr('data-id');
+		const dataKey =  $(this).attr('data-id');
 		let deleteTasks = new crud('delete', dataKey, null);
 
 	});

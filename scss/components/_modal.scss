@@ -1,5 +1,6 @@
 #layer{
 	// background-color: rgba(0, 0, 0, .5);
+    display: none;
 
     z-index: 10;
     &:after{
@@ -11,23 +12,48 @@
         left: 0;
         right: 0;
         z-index: 300;
-        height: 100vh;
+        height: 150vh;
         width: 100vw;
     }
 
 }
 
-#modal{
+#delete-confirmation{
+    display: none;
 	background: white;
 	position: fixed;
-    width: 40vw;
-	height: 500px;
+    width: 25vw;
+	height: 100px;
     left:0;
     right:0;
     border: 5px;
-    margin: 7vh 30vw;
+    margin: 40vh 40vw;
     z-index: 400;
     top: 30px;
     padding-left: 3rem;
     padding-right: 3rem;
+
+    h4{
+        color: black;
+        padding-top: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-family: $bold;
+    }
+    button{
+        @include grid-col(5);
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        font-size: 18px;
+        font-family: $bold;
+
+    }
+    button:nth-child(3){
+        background: $secondary;
+    }
+
+    button:nth-child(2){
+        background: $red;
+    }
 }

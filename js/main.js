@@ -1,4 +1,5 @@
 import * as progressBar from './interactions';
+import {modal} from './interactions';
 import {validationForm} from './validationForm';
 import {model} from './model';
 import {templates as view} from './view';
@@ -39,7 +40,19 @@ $(document).ready(function($) {
 	$($).on('click', '.deleteTask', function(event) {
 
 		const dataKey =  $(this).attr('data-id');
-		let deleteTasks = new crud('delete', dataKey, null);
+
+		// confirmation modal
+		modal();
+
+		$('#delete-yes').click(function(event) {
+
+			let deleteTasks = new crud('delete', dataKey, null);
+	      	$('#delete-confirmation').fadeOut();
+      		$('#layer').fadeOut();
+
+
+		});
+
 
 	});
 

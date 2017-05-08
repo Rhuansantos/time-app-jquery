@@ -74,6 +74,9 @@ var crud = exports.crud = function () {
 },{"./view":6}],2:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 // ========================= Progress Bar =========================
 // on page load...
 moveProgressBar();
@@ -97,12 +100,19 @@ function moveProgressBar() {
 
 
 // ========================= modal =========================
-$('#layer').click(function (event) {
-    /* Act on the event */
-    // alert('ok');
-    $('#modal').fadeOut();
+function modal() {
+
+    $('#delete-confirmation').fadeIn();
+    $('#layer').fadeIn();
+}
+
+$('#layer, #delete-no').click(function (event) {
+
+    $('#delete-confirmation').fadeOut();
     $('#layer').fadeOut();
 });
+
+exports.modal = modal;
 
 // ========================= modal =========================
 
@@ -152,7 +162,16 @@ $(document).ready(function ($) {
 	$($).on('click', '.deleteTask', function (event) {
 
 		var dataKey = $(this).attr('data-id');
-		var deleteTasks = new _controller.crud('delete', dataKey, null);
+
+		// confirmation modal
+		(0, _interactions.modal)();
+
+		$('#delete-yes').click(function (event) {
+
+			var deleteTasks = new _controller.crud('delete', dataKey, null);
+			$('#delete-confirmation').fadeOut();
+			$('#layer').fadeOut();
+		});
 	});
 });
 

@@ -21,12 +21,21 @@
 
 
 // ========================= modal =========================
-$('#layer').click(function(event) {
-    /* Act on the event */
-    // alert('ok');
-    $('#modal').fadeOut();
-    $('#layer').fadeOut();
+function modal(){
 
-});
+        $('#delete-confirmation').fadeIn();
+        $('#layer').fadeIn();
+
+}
+
+
+ $('#layer, #delete-no').click(function(event) {
+
+      $('#delete-confirmation').fadeOut();
+      $('#layer').fadeOut();
+ });
+
+
+export {modal};
 
 // ========================= modal =========================

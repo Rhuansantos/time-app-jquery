@@ -19,21 +19,10 @@ $(document).ready(function($) {
 
 
     $('#addTask').click(function(event) {
-
-        const taskInput = $('#add-task').val();
-
-        // instanciate inputs
-        let validateName = new validationForm(taskInput, 'text');
-       	let inputFeedback = validationForm.feedback();
-
-
-		 let key = '5';
-		 let taskVal = $('#add-task').val();
-		 let createTasks = new crud('create', key, taskVal);
-		 $('#add-task').val('');
-     
-
-
+    	
+    	let taskInput = $('#add-task').val();
+    	let validateTask = new validationForm(taskInput, 'text');
+  
     });
 
 	// deleting task
@@ -57,9 +46,7 @@ $(document).ready(function($) {
 			});;
 
 	
-      			$('#layer').fadeOut(1200);
-
-
+  			$('#layer').fadeOut(1200);
 
 
 		});

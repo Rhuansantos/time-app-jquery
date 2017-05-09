@@ -1,5 +1,4 @@
-
-
+import {crud} from './controller';
 
 export class validationForm {
 
@@ -9,21 +8,7 @@ export class validationForm {
 
 		let exec = this.verifyErrors();
 
-        console.log('hey', this.input);
 	}
-
-    static feedback(error){
-
-       let inputStatus = error;
-
-       console.log('daqui', inputStatus);
-
-       if(inputStatus !== 'ok'){
-            return 'error';
-         }else{
-             return 'ok';
-         }
-    }
 
     verifyErrors() {
 
@@ -31,21 +16,32 @@ export class validationForm {
 
         if(this.type == 'text'){
 
-            if(status.length < 3){
-                $(".alert").fadeIn();
-                $(".alert").append('this value is too short');
+            if(status.length <= 4){
+
+              if($('.error-msg').length < 1){
+                  $(".alert").fadeIn();
+                  $(".alert").append('<span class="error-msg">this value is too short</span>');
+              }
+
             }
-            if(status.length > 50){
-                $(".alert").fadeIn();
-                $(".alert").append('this value is too long');
+            if(status.length >= 50){
+                if($('.error-msg').length < 1){
+                  $(".alert").fadeIn();
+                  $(".alert").append('<span class="error-msg">this value is too long</span>');
+                }
             }
 
-            if(status.length > 3 && status.length < 50){
+            if(status.length >= 4 && status.length <= 50){
                 $(".alert").fadeOut();
-                validationForm.feedback('ok');
+                $(".error-msg").remove();
+
+                  let taskVal = $('#add-task').val(); 
+                  let key = '5';
+                  let createTasks = new crud('create', key, taskVal);
+                 
+                 
+                 $('#add-task').val('');
             }
         }        
     }
-
-
 }

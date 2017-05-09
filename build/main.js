@@ -155,15 +155,7 @@ $(document).ready(function ($) {
 	$('#addTask').click(function (event) {
 
 		var taskInput = $('#add-task').val();
-
-		// instanciate inputs
-		var validateName = new _validationForm.validationForm(taskInput, 'text');
-		var inputFeedback = _validationForm.validationForm.feedback();
-
-		var key = '5';
-		var taskVal = $('#add-task').val();
-		var createTasks = new _controller.crud('create', key, taskVal);
-		$('#add-task').val('');
+		var validateTask = new _validationForm.validationForm(taskInput, 'text');
 	});
 
 	// deleting task
@@ -258,8 +250,11 @@ var model = exports.model = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.validationForm = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _controller = require('./controller');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -271,8 +266,6 @@ var validationForm = exports.validationForm = function () {
         this.type = type;
 
         var exec = this.verifyErrors();
-
-        console.log('hey', this.input);
     }
 
     _createClass(validationForm, [{
@@ -283,33 +276,30 @@ var validationForm = exports.validationForm = function () {
 
             if (this.type == 'text') {
 
-                if (status.length < 3) {
-                    $(".alert").fadeIn();
-                    $(".alert").append('this value is too short');
+                if (status.length <= 4) {
+
+                    if ($('.error-msg').length < 1) {
+                        $(".alert").fadeIn();
+                        $(".alert").append('<span class="error-msg">this value is too short</span>');
+                    }
                 }
-                if (status.length > 50) {
-                    $(".alert").fadeIn();
-                    $(".alert").append('this value is too long');
+                if (status.length >= 50) {
+                    if ($('.error-msg').length < 1) {
+                        $(".alert").fadeIn();
+                        $(".alert").append('<span class="error-msg">this value is too long</span>');
+                    }
                 }
 
-                if (status.length > 3 && status.length < 50) {
+                if (status.length >= 4 && status.length <= 50) {
                     $(".alert").fadeOut();
-                    validationForm.feedback('ok');
+                    $(".error-msg").remove();
+
+                    var taskVal = $('#add-task').val();
+                    var key = '5';
+                    var createTasks = new _controller.crud('create', key, taskVal);
+
+                    $('#add-task').val('');
                 }
-            }
-        }
-    }], [{
-        key: 'feedback',
-        value: function feedback(error) {
-
-            var inputStatus = error;
-
-            console.log('daqui', inputStatus);
-
-            if (inputStatus !== 'ok') {
-                return 'error';
-            } else {
-                return 'ok';
             }
         }
     }]);
@@ -317,7 +307,7 @@ var validationForm = exports.validationForm = function () {
     return validationForm;
 }();
 
-},{}],6:[function(require,module,exports){
+},{"./controller":1}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

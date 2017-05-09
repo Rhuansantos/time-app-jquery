@@ -266,6 +266,8 @@ var model = exports.model = function () {
 					// buildObj.data = val;
 				});
 
+				console.log(buildObj);
+
 				var storeTasks = localStorage.setItem("tasks", JSON.stringify(buildObj));
 			});
 		}

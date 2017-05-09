@@ -17,6 +17,8 @@ static loadJson(){
 
 	  });
 
+	  console.log(buildObj);
+
 	  let storeTasks = localStorage.setItem("tasks", JSON.stringify(buildObj));
 	 
 	});

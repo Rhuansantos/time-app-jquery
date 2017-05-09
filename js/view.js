@@ -8,28 +8,28 @@ export class templates {
 		let template = `
 		<li data-id="${key}">
 			<input type="text" value="${_value}" disabled>
-			<span data-id="${key}" class="editTask"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-			<span data-id="${key}" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>
 		</li>
+		<span data-id="${key}" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>
 		`;
 
 		$('#to-do-list').prepend(template);
 	}
 
 
-	static editModal (_value) {
+	static editModal (_value, _key) {
+
+		$('.modal-content').remove();
 
 		let template = `
-		 	<div id="update-confirmation">
+		 	<div id="update-confirmation"  class="modal-content">
 		 		<input type="text" id="update" value="${_value}">
-		 		<h4>Do you wanna save your changes?</h4>
-		 		<button id="delete-yes">Yes</button>
-		 		<button id="delete-no">No</button>
+		 		<button id="save-update" data-id="${_key}">Save changes</button>
  			</div>
 		`;
 
+	
 		modal();
-
+		console.log('function-1');
 	   if($('#update-confirmation').length < 1){
 
 	   		$('#delete-confirmation').prepend(template);
@@ -39,8 +39,10 @@ export class templates {
 
 	static deleteModal () {
 
+		$('.modal-content').remove();
+
 		let template = `
-			<div id="delete-modal">
+			<div id="delete-modal" class="modal-content">
 		 		<h4>Are you sure that you want to delete this item?</h4>
 		 		<button id="delete-yes">Yes</button>
 		 		<button id="delete-no">No</button>
@@ -48,10 +50,11 @@ export class templates {
 		`;
 
 		modal();
+		console.log('function-2');
 
-	  if($('#delete-modal').length < 1){
-	  	
-		$('#delete-confirmation').prepend(template);
+	  	if($('#delete-modal').length < 1){
+
+			$('#delete-confirmation').prepend(template);
 
 		}
 	}

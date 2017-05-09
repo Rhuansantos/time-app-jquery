@@ -84,7 +84,7 @@ var crud = exports.crud = function () {
 
 			var storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 
-			$('[data-id=' + this.key + ']').fadeOut();
+			// $('[data-id=' + this.key + ']').fadeOut();
 		}
 	}]);
 
@@ -161,6 +161,9 @@ var _controller = require('./controller');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+var editKey = 0;
+var taskEditInput = null;
+
 $(document).ready(function ($) {
 
 	// if the initial data is not there yet do it
@@ -179,19 +182,27 @@ $(document).ready(function ($) {
 		var validateTask = new _validationForm.validationForm(taskInput, 'text');
 	});
 
-	$($).on('click', '#to-do-list > li', '.editTask', function (event) {
+	$($).on('click', '#to-do-list > li', function test(event) {
 
-		// const dataKey =  $(this).attr('data-id');
+		var dataKey = $(this).attr('data-id');
 
-		var dataKey = $(this).index() + 1;
+		editKey = $(this).index() + 1;
 
-		console.log(dataKey);
-		var taskInput = $('#to-do-list > li:nth-child(' + dataKey + ') > input[type="text"]').val();
+		taskEditInput = $('#to-do-list > li:nth-child(' + editKey + ') > input[type="text"]').val();
 
-		// templates.editModal(taskInput);
+		_view.templates.editModal(taskEditInput, editKey);
 
+		$('#update').val(taskEditInput);
+	});
 
-		// const updateTasks = new crud('update', dataKey, taskInput);
+	$($).on('click', '#save-update', function test(event) {
+
+		taskEditInput = $('#update').val();
+
+		var dataKey = $(this).attr('data-id');
+
+		var deleteTasks = new _controller.crud('delete', dataKey, null);
+		// let updateTasks = new crud('update', editKey, taskEditInput);
 
 	});
 
@@ -201,8 +212,6 @@ $(document).ready(function ($) {
 		var dataKey = $(this).attr('data-id');
 
 		_view.templates.deleteModal();
-		// confirmation modal
-		// modal();
 
 		$('#delete-yes').click(function (event) {
 
@@ -370,18 +379,20 @@ var templates = exports.templates = function () {
 		key: 'task',
 		value: function task(key, _value) {
 
-			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="editTask"><i class="fa fa-pencil" aria-hidden="true"></i></span>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
+			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t</li>\n\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t';
 
 			$('#to-do-list').prepend(template);
 		}
 	}, {
 		key: 'editModal',
-		value: function editModal(_value) {
+		value: function editModal(_value, _key) {
 
-			var template = '\n\t\t \t<div id="update-confirmation">\n\t\t \t\t<input type="text" id="update" value="' + _value + '">\n\t\t \t\t<h4>Do you wanna save your changes?</h4>\n\t\t \t\t<button id="delete-yes">Yes</button>\n\t\t \t\t<button id="delete-no">No</button>\n \t\t\t</div>\n\t\t';
+			$('.modal-content').remove();
+
+			var template = '\n\t\t \t<div id="update-confirmation"  class="modal-content">\n\t\t \t\t<input type="text" id="update" value="' + _value + '">\n\t\t \t\t<button id="save-update" data-id="' + _key + '">Save changes</button>\n \t\t\t</div>\n\t\t';
 
 			(0, _interactions.modal)();
-
+			console.log('function-1');
 			if ($('#update-confirmation').length < 1) {
 
 				$('#delete-confirmation').prepend(template);
@@ -391,9 +402,12 @@ var templates = exports.templates = function () {
 		key: 'deleteModal',
 		value: function deleteModal() {
 
-			var template = '\n\t\t\t<div id="delete-modal">\n\t\t \t\t<h4>Are you sure that you want to delete this item?</h4>\n\t\t \t\t<button id="delete-yes">Yes</button>\n\t\t \t\t<button id="delete-no">No</button>\n\t \t\t</div>\n\t\t';
+			$('.modal-content').remove();
+
+			var template = '\n\t\t\t<div id="delete-modal" class="modal-content">\n\t\t \t\t<h4>Are you sure that you want to delete this item?</h4>\n\t\t \t\t<button id="delete-yes">Yes</button>\n\t\t \t\t<button id="delete-no">No</button>\n\t \t\t</div>\n\t\t';
 
 			(0, _interactions.modal)();
+			console.log('function-2');
 
 			if ($('#delete-modal').length < 1) {
 

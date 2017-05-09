@@ -67,7 +67,7 @@ export class crud {
 
 		let storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 		
-		$('[data-id=' + this.key + ']').fadeOut();
+		// $('[data-id=' + this.key + ']').fadeOut();
 
 	}
 

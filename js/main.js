@@ -4,8 +4,11 @@ import {model} from './model';
 import {templates} from './view'; 
 import {crud} from './controller';
 
+let editKey = 0;
+let taskEditInput = null;
 
 $(document).ready(function($) {
+
 
 	// if the initial data is not there yet do it
 	if(localStorage.tasks == null || localStorage.tasks == 'undefined'){
@@ -24,24 +27,35 @@ $(document).ready(function($) {
   
     });
 
-	$($).on('click', '#to-do-list > li', '.editTask', function(event) {
+	$($).on('click', '#to-do-list > li', function test(event) {
 
-		// const dataKey =  $(this).attr('data-id');
+		let dataKey =  $(this).attr('data-id');
 
-		const dataKey =  $(this).index()+1;
+		editKey =  $(this).index()+1;
 
-		console.log(dataKey);
-		const taskInput = $('#to-do-list > li:nth-child('+ dataKey +') > input[type="text"]').val();
+		taskEditInput = $('#to-do-list > li:nth-child('+ editKey +') > input[type="text"]').val();
 
-		// templates.editModal(taskInput);
+		templates.editModal(taskEditInput, editKey);
 
-
-
-		// const updateTasks = new crud('update', dataKey, taskInput);
-
-
+		$('#update').val(taskEditInput);
+				
 
 	});
+
+
+	$($).on('click', '#save-update', function test(event) {
+
+		taskEditInput = $('#update').val();
+
+		let dataKey =  $(this).attr('data-id');
+
+		let deleteTasks = new crud('delete', dataKey, null);
+		// let updateTasks = new crud('update', editKey, taskEditInput);
+			
+
+	});
+
+		
 
 	// deleting task
 	$($).on('click', '.deleteTask', function(event) {
@@ -49,8 +63,6 @@ $(document).ready(function($) {
 		const dataKey =  $(this).attr('data-id');
 
 		templates.deleteModal();
-		// confirmation modal
-		// modal();
 
 		$('#delete-yes').click(function(event) {
 

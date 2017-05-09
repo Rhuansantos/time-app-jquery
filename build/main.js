@@ -26,6 +26,9 @@ var crud = exports.crud = function () {
 		if (this.methods === 'delete') {
 			this.delete();
 		}
+		if (this.methods === 'update') {
+			this.update();
+		}
 	}
 
 	_createClass(crud, [{
@@ -51,7 +54,24 @@ var crud = exports.crud = function () {
 		}
 	}, {
 		key: 'update',
-		value: function update() {}
+		value: function update() {
+
+			var data = [];
+
+			// new array to restore everything
+			var newTasks = [];
+			newTasks = this.value;
+
+			data.task = JSON.parse(localStorage.getItem('tasks')) || [];
+
+			data.task.push(newTasks);
+
+			// storing the data
+			var storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
+
+			// print result
+			_view.templates.task(this.key, this.value);
+		}
 	}, {
 		key: 'delete',
 		value: function _delete() {
@@ -152,10 +172,27 @@ $(document).ready(function ($) {
 	// print the data
 	_model.model.loadLocalStorage();
 
+	//adding new element
 	$('#addTask').click(function (event) {
 
 		var taskInput = $('#add-task').val();
 		var validateTask = new _validationForm.validationForm(taskInput, 'text');
+	});
+
+	$($).on('click', '#to-do-list > li', '.editTask', function (event) {
+
+		// const dataKey =  $(this).attr('data-id');
+
+		var dataKey = $(this).index() + 1;
+
+		console.log(dataKey);
+		var taskInput = $('#to-do-list > li:nth-child(' + dataKey + ') > input[type="text"]').val();
+
+		// templates.editModal(taskInput);
+
+
+		// const updateTasks = new crud('update', dataKey, taskInput);
+
 	});
 
 	// deleting task
@@ -163,8 +200,9 @@ $(document).ready(function ($) {
 
 		var dataKey = $(this).attr('data-id');
 
+		_view.templates.deleteModal();
 		// confirmation modal
-		(0, _interactions.modal)();
+		// modal();
 
 		$('#delete-yes').click(function (event) {
 
@@ -313,12 +351,13 @@ var validationForm = exports.validationForm = function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.templates = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _interactions = require('./interactions');
 
-// const template = {};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var taskInput = $('#add-task').val();
 
@@ -331,13 +370,39 @@ var templates = exports.templates = function () {
 		key: 'task',
 		value: function task(key, _value) {
 
-			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
+			var template = '\n\t\t<li data-id="' + key + '">\n\t\t\t<input type="text" value="' + _value + '" disabled>\n\t\t\t<span data-id="' + key + '" class="editTask"><i class="fa fa-pencil" aria-hidden="true"></i></span>\n\t\t\t<span data-id="' + key + '" class="deleteTask"><i class="fa fa-minus-circle" aria-hidden="true"></i><span>\n\t\t</li>\n\t\t';
 
 			$('#to-do-list').prepend(template);
+		}
+	}, {
+		key: 'editModal',
+		value: function editModal(_value) {
+
+			var template = '\n\t\t \t<div id="update-confirmation">\n\t\t \t\t<input type="text" id="update" value="' + _value + '">\n\t\t \t\t<h4>Do you wanna save your changes?</h4>\n\t\t \t\t<button id="delete-yes">Yes</button>\n\t\t \t\t<button id="delete-no">No</button>\n \t\t\t</div>\n\t\t';
+
+			(0, _interactions.modal)();
+
+			if ($('#update-confirmation').length < 1) {
+
+				$('#delete-confirmation').prepend(template);
+			}
+		}
+	}, {
+		key: 'deleteModal',
+		value: function deleteModal() {
+
+			var template = '\n\t\t\t<div id="delete-modal">\n\t\t \t\t<h4>Are you sure that you want to delete this item?</h4>\n\t\t \t\t<button id="delete-yes">Yes</button>\n\t\t \t\t<button id="delete-no">No</button>\n\t \t\t</div>\n\t\t';
+
+			(0, _interactions.modal)();
+
+			if ($('#delete-modal').length < 1) {
+
+				$('#delete-confirmation').prepend(template);
+			}
 		}
 	}]);
 
 	return templates;
 }();
 
-},{}]},{},[3]);
+},{"./interactions":2}]},{},[3]);

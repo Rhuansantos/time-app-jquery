@@ -1194,7 +1194,7 @@ section {
     #tasks ul li input[type='text'], #overall ul li input[type='text'] {
       background: none;
       color: white;
-      width: 90%;
+      width: 80%;
       height: 100%;
       padding: 20px; }
     @media screen and (max-width: 78.125em) {
@@ -1208,6 +1208,9 @@ section {
       #tasks ul li span .fa-minus-circle, #overall ul li span .fa-minus-circle {
         color: #ff6666;
         margin-left: 5%;
+        font-size: 20px; }
+      #tasks ul li span .fa-pencil, #overall ul li span .fa-pencil {
+        color: white;
         font-size: 20px; }
   #tasks p, #overall p {
     width: 100%;

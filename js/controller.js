@@ -13,6 +13,9 @@ export class crud {
 		if(this.methods === 'delete'){
 			this.delete();
 		}
+		if(this.methods === 'update'){
+			this.update();
+		}
 	}
 	create(){
 
@@ -36,6 +39,22 @@ export class crud {
 
 	}
 	update(){
+
+		let data = [];
+
+		// new array to restore everything
+		let newTasks = [];
+		newTasks = this.value;
+
+		data.task = JSON.parse(localStorage.getItem('tasks')) || [];
+
+		data.task.push(newTasks);
+
+		// storing the data
+		let storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
+
+		// print result
+		templates.task(this.key, this.value);
 
 	}
 	delete(){

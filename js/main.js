@@ -35,7 +35,7 @@ $(document).ready(function($) {
 
 		taskEditInput = $('#to-do-list > li:nth-child('+ editKey +') > input[type="text"]').val();
 
-		templates.editModal(taskEditInput, editKey);
+		templates.editModal(taskEditInput, dataKey);
 
 		$('#update').val(taskEditInput);
 				
@@ -49,8 +49,12 @@ $(document).ready(function($) {
 
 		let dataKey =  $(this).attr('data-id');
 
+		console.log(dataKey);
+
 		let deleteTasks = new crud('delete', dataKey, null);
-		// let updateTasks = new crud('update', editKey, taskEditInput);
+		let updateTasks = new crud('update', editKey, taskEditInput);
+
+		$('#layer, #delete-confirmation').fadeOut();
 			
 
 	});

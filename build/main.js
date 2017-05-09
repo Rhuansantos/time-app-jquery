@@ -84,7 +84,7 @@ var crud = exports.crud = function () {
 
 			var storeTasks = localStorage.setItem("tasks", JSON.stringify(data.task));
 
-			// $('[data-id=' + this.key + ']').fadeOut();
+			$('[data-id=' + this.key + ']').fadeOut();
 		}
 	}]);
 
@@ -190,7 +190,7 @@ $(document).ready(function ($) {
 
 		taskEditInput = $('#to-do-list > li:nth-child(' + editKey + ') > input[type="text"]').val();
 
-		_view.templates.editModal(taskEditInput, editKey);
+		_view.templates.editModal(taskEditInput, dataKey);
 
 		$('#update').val(taskEditInput);
 	});
@@ -201,9 +201,12 @@ $(document).ready(function ($) {
 
 		var dataKey = $(this).attr('data-id');
 
-		var deleteTasks = new _controller.crud('delete', dataKey, null);
-		// let updateTasks = new crud('update', editKey, taskEditInput);
+		console.log(dataKey);
 
+		var deleteTasks = new _controller.crud('delete', dataKey, null);
+		var updateTasks = new _controller.crud('update', editKey, taskEditInput);
+
+		$('#layer, #delete-confirmation').fadeOut();
 	});
 
 	// deleting task

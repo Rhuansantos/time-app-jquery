@@ -12,8 +12,8 @@ $(document).ready(function($) {
 
 	// if the initial data is not there yet do it
 	if(localStorage.tasks == null || localStorage.tasks == 'undefined'){
-		location.reload();
 		model.loadJson();
+		// location.reload();
 	}
 
 	// print the data

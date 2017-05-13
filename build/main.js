@@ -169,7 +169,7 @@ $(document).ready(function ($) {
 	// if the initial data is not there yet do it
 	if (localStorage.tasks == null || localStorage.tasks == 'undefined') {
 		_model.model.loadJson();
-		// location.reload();
+		location.reload(); // bug :(
 	}
 
 	// print the data
